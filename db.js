@@ -1,12 +1,10 @@
-async function conexao() {
-    if (global.connection && global.connection.state !== 'disconnected');
-    return global.connection;
+const mysql = require('mysql');
 
-    const msql = require('mysql2/promise');
-    const con = await msql.createConnection("mysql://root:123456@localhost:3306/videos_vd");
-    global.connection = con;
-    return con;
+var pool = mysql.createPool({
 
-}
-conexao();
-module.exports = {};
+    "user": process.env.MYSQL_USER,
+    "password": process.env.MYSQL_PASSWORD,
+    "host": process.env.MYSQL_HOST,
+    "port": process.env.MYSQL_PORT
+});
+exports.pool = pool;
