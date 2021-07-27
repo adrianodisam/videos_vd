@@ -1,11 +1,17 @@
-class Tag {
-    constructor(id, nome, descricao, dataCriacao, dataAtulizacao) {
-        this.id = id;
-        this.nome = nome;
-        this.dataCriacao = dataCriacao;
-        this.dataAtulizacao = dataAtulizacao;
+const Sequelize = require('sequelize');
+const database = require('../db');
+
+const tag = database.define('tag', {
+    id: {
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        allowNull: false,
+        primaryKey: true
+    },
+    nome: {
+        type: Sequelize.STRING,
+        allowNull: false
     }
+})
 
-};
-
-module.exports = Tag;
+module.exports = tag;

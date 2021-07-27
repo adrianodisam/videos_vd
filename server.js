@@ -2,7 +2,6 @@ const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 3000;
 const bodyParser = require('body-parser');
-
 const rotaCategoria = require('./routes/categoria')
 const rotaVideo = require('./routes/video')
 const rotaTags = require('./routes/tag')

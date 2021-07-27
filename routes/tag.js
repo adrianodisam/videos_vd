@@ -1,18 +1,30 @@
 const express = require('express');
 const router = express.Router();
+const database = require('../db');
+const Tag = require('../model/Tag');
 
 // retorna todas as tags
 
 router.get('/', (req, res, next) => {
-
-        res.status(200).send({
-            mensagem: "usando get rota de tag"
+        (async() => {
+            const ListTag = await Tag.findAll()
+            res.status(200).send(ListTag);
         })
+        ();
     })
     // adiciona tags
 router.post('/', (req, res, next) => {
-        res.status(200).send({
-            mensagem: "usando post rota de tag"
+        (async() => {
+
+            await database.sync();
+            const novaTag = await Tag.create({
+                nome: req.body.nome,
+            })
+        })
+        ();
+        res.status(201).send({
+            mensagem: "adionada uma tag "
+
         })
     })
     // altera uma tag

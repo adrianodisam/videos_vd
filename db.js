@@ -1,10 +1,8 @@
-const mysql = require('mysql');
+const Sequelize = require('sequelize');
+const sequelize = new Sequelize('videos', 'root', '123456', {
 
-var pool = mysql.createPool({
-
-    "user": process.env.MYSQL_USER,
-    "password": process.env.MYSQL_PASSWORD,
-    "host": process.env.MYSQL_HOST,
-    "port": process.env.MYSQL_PORT
-});
-exports.pool = pool;
+    dialect: 'mysql',
+    host: 'localhost',
+    port: 3306
+})
+module.exports = sequelize;

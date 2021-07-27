@@ -1,34 +1,32 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../db').pool;
-const mysql = require('mysql2');
+const database = require('../db');
+const Categoria = require('../model/Categoria')
+
 
 // retorna todas categorias
-
 router.get('/', (req, res, next) => {
-
-        res.status(200).send({
-            mensagem: "usando get rota de categoria"
+        (async() => {
+            const ListCategoria = await Categoria.findAll()
+            res.status(200).send(ListCategoria);
         })
+        ();
     })
     // adiciona categorias
 router.post('/', (req, res, next) => {
-        db.getConnection((error, conn) => {
-            conn.query('INSERT INTO categoria (`nome`, `descricao`, `data_criacao`, `data_atualizacao`) VALUES ("TRASFROMES", "DDD", 2021-07-23 14:28:32, 2021-07-23 14:28:32)'),
-                (error, resultado, field) => {
-                    conn.release();
-                    if (error) {
-                        return res.status(500).send({
-                            error: error,
-                            response: null
-                        });
-                    }
-                    res.status(201).send({
-                        mensagem: "categoria inserida com sucesso",
-                        id_categoria: resultado.id_categoria
 
-                    })
-                }
+        (async() => {
+            await database.sync();
+            const novaCategoria = await Categoria.create({
+                nome: req.body.nome,
+                descricao: req.body.descricao,
+            })
+        })
+        ();
+
+        res.status(201).send({
+            mensagem: "categoria inserida com sucesso"
+
         })
     })
     // altera uma categoria

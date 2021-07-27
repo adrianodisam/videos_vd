@@ -1,12 +1,22 @@
-class Categoria {
-    constructor(id, nome, descricao, dataCriacao, dataAtulizacao) {
-        this.id = id;
-        this.nome = nome;
-        this.descricao = descricao;
-        this.dataCriacao = dataCriacao;
-        this.dataAtulizacao = dataAtulizacao;
+const Sequelize = require('sequelize');
+const database = require('../db');
+
+const categoria = database.define('categoria', {
+    id: {
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        allowNull: false,
+        primaryKey: true
+    },
+    nome: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    descricao: {
+        type: Sequelize.STRING,
+        allowNull: false
     }
 
-};
+})
 
-module.exports = Categoria;
+module.exports = categoria;

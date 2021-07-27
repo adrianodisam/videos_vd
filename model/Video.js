@@ -1,11 +1,33 @@
-class Video {
-    constructor(id, nome, descricao, dataCriacao, dataAtulizacao) {
-        this.id = id;
-        this.nome = nome;
-        this.descricao = descricao;
-        this.dataCriacao = dataCriacao;
-        this.dataAtulizacao = dataAtulizacao;
-    }
+const Sequelize = require('sequelize');
+const database = require('../db');
 
-};
-module.exports = Video;
+const video = database.define('tag', {
+    id: {
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        allowNull: false,
+        primaryKey: true
+    },
+    id_categoria: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+    },
+    nome: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    descricao: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    ativo: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: 1
+    },
+    foreignKey:
+
+})
+
+
+module.exports = video;
